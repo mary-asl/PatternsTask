@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Wildberries" verbose="1" parallel="classes" thread-count="3">
+    <test name="Wildberries">
+        <classes>
+            <class name="tests.EksmoPageTest"></class>
+            <class name="tests.TextSearchTest"></class>
+            <class name="tests.DropdownListsTest"></class>
+        </classes>
+    </test>
+
+</suite>

@@ -1,11 +1,14 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.CategoryPage;
-import pageObjects.EksmoPage;
-import pageObjects.HomePage;
-import pageObjects.ItemPage;
+import tests.pageObject.CategoryPage;
+import tests.pageObject.EksmoPage;
+import tests.pageObject.HomePage;
+import tests.pageObject.ItemPage;
 
 import java.util.List;
 
@@ -15,10 +18,10 @@ public class EksmoPageTest extends BaseForAllTests {
     private static final String EKSMO_PAGE_LINK = "https://www.wildberries.kz/brands/eksmo";
 
     @Test(description = "verify that items filtered by discount")
-    public void filterByDiscount() {
+    @Parameters({"category"})
+    public void filterByDiscount(@Optional(value = "Psychology") String category) {
         boolean actual = false;
-        EksmoPage eksmoPage = new HomePage(driver).clickBrandLogo().selectCategory();
-        CategoryPage categoryPage = new CategoryPage(driver).filterByDiscount();
+        CategoryPage categoryPage = new HomePage(driver).clickBrandLogo().selectCategory(category).filterByDiscount();
         List<Double> doubleDiscounts = categoryPage.parseDoubleDiscount();
         outerloop:
         for (int i = 0; i < doubleDiscounts.size(); i++) {
@@ -75,11 +78,21 @@ public class EksmoPageTest extends BaseForAllTests {
         Assert.assertTrue(eksmoPage.findCategoryBanners().isDisplayed(), "there are no categories on the shop's page");
     }
 
-    @Test(description = "verify that displayed item corresponds to the selected category")
-    public void isCategoryCorrect() {
-        ItemPage itemPage = new CategoryPage(driver).selectItem();
+    @Test(description = "verify that displayed item corresponds to the selected category",
+            dataProvider = "bookCategories")
+    public void isCategoryCorrect(String category, String expected) {
+        driver.navigate().to(EKSMO_PAGE_LINK);
+        CategoryPage categoryPage = new EksmoPage(driver).selectCategory(category);
+        ItemPage itemPage = categoryPage.selectItem();
         itemPage.readAllInformation();
-        String expected = "Психология";
         Assert.assertEquals(itemPage.getCategory(), expected, "the item category does not match the selected category");
+    }
+
+    @DataProvider(name = "bookCategories", parallel = false)
+    public Object[][] bookCategories() {
+        return new Object[][]{
+                {"Psychology", "Психология"},
+                {"Cooking", "Кулинария"}
+        };
     }
 }

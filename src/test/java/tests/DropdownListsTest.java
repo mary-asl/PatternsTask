@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.HomePage;
+import tests.pageObject.HomePage;
 
 public class DropdownListsTest extends BaseForAllTests {
     @Test(description = "verify that current location was changed after changed the country", dataProvider = "locationDataProvider")

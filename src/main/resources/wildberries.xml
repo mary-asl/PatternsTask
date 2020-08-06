@@ -2,6 +2,7 @@
 
 <suite name="Wildberries" verbose="1" parallel="classes" thread-count="3">
     <test name="Wildberries">
+        <parameter name="category" value="Psychology"></parameter>
         <classes>
             <class name="tests.EksmoPageTest"></class>
             <class name="tests.TextSearchTest"></class>

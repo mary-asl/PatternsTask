@@ -5,8 +5,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pageObjects.CategoryPage;
-import pageObjects.HomePage;
+import tests.pageObject.CategoryPage;
+import tests.pageObject.HomePage;
 
 import java.util.concurrent.TimeUnit;
 

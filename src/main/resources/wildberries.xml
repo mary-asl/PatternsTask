@@ -4,9 +4,9 @@
     <test name="Wildberries">
         <parameter name="category" value="Psychology"></parameter>
         <classes>
-            <class name="tests.EksmoPageTest"></class>
-            <class name="tests.TextSearchTest"></class>
-            <class name="tests.DropdownListsTest"></class>
+            <class name="com.epam.task5.tests.EksmoPageTest"></class>
+            <class name="com.epam.task5.tests.TextSearchTest"></class>
+            <class name="com.epam.task5.tests.DropdownListsTest"></class>
         </classes>
     </test>
 

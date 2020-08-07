@@ -7,6 +7,11 @@ import tests.businessObject.Locale;
 import tests.pageObject.HomePage;
 
 public class DropdownListsTest extends BaseForAllTests {
+
+    public DropdownListsTest() throws Exception {
+        super();
+    }
+
     @Test(description = "verify that current location was changed after changed the country", dataProvider = "locationDataProvider")
     public void verifyCurrentLocation(String country, String expectedLocation){
         Locale locale = new Locale(driver);

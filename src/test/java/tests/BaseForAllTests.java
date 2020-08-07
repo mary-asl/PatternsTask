@@ -1,36 +1,36 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import java.util.concurrent.TimeUnit;
+import framework.driver.Driver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 public abstract class BaseForAllTests {
 
-    protected WebDriver driver;
     private static final String BASE_URL = "https://www.wildberries.kz";
     public Logger logger = LogManager.getLogger();
 
+    WebDriver driver;
+
+    public BaseForAllTests() throws Exception {
+        this.driver = Driver.getWebDriver();
+    }
+
     @BeforeClass
-    public void initWebDriver() {
-        System.setProperty("webdriver.gecko.driver", "src/main/resources/webdrivers/geckodriver.exe");
-        driver = new FirefoxDriver();
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        try{
+    public void openWebDriver() {
+        try {
             driver.get(BASE_URL);
-        }catch(WebDriverException e){
+        } catch (WebDriverException e) {
             logger.error("WebDriverException occured");
         }
-        driver.manage().window().maximize();
     }
 
     @AfterClass
     public void quit() {
-        driver.quit();
+        Driver.closeBrowser();
     }
 
 }

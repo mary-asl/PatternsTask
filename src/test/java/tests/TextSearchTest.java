@@ -12,6 +12,10 @@ import java.util.concurrent.TimeUnit;
 
 public class TextSearchTest extends BaseForAllTests {
 
+    public TextSearchTest() throws Exception {
+        super();
+    }
+
     @Test(description = "verify that found item's name contains words from text search",
             dataProvider = "searchingItems")
     public void isItemFound(String searchingItem) {

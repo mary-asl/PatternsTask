@@ -5,11 +5,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import tests.businessObject.Item;
 import tests.pageObject.CategoryPage;
 import tests.pageObject.EksmoPage;
 import tests.pageObject.HomePage;
 import tests.pageObject.ItemPage;
-import tests.businessObject.Item;
 
 import java.util.List;
 
@@ -17,6 +17,10 @@ import java.util.List;
 public class EksmoPageTest extends BaseForAllTests {
 
     private static final String EKSMO_PAGE_LINK = "https://www.wildberries.kz/brands/eksmo";
+
+    public EksmoPageTest() throws Exception {
+        super();
+    }
 
     @Test(description = "verify that items filtered by discount")
     @Parameters({"category"})

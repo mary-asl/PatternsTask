@@ -45,8 +45,7 @@ public class TextSearchTest extends BaseForAllTests {
     @DataProvider(name = "searchingItems", parallel = false)
     public Object[][] serchingItems() {
         return new Object[][]{
-                {"funko pop star wars"},
-                {"носки с авокадо"},
+                {"funko pop star wars"},               
                 {"POLO SHIRT"}
         };
 

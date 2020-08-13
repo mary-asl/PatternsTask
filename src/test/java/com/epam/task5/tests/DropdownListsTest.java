@@ -15,7 +15,7 @@ public class DropdownListsTest extends BaseForAllTests {
     @Test(description = "verify that current location was changed after changed the country",
             dataProvider = "locationDataProvider")
     public void verifyCurrentLocation(String country, String expectedLocation) {
-        Locale locale = new Locale(driver);
+        Locale locale = new Locale();
         HomePage homePage = new HomePage(driver).hoverToChangeLocaleBtn();
         locale.setCountry(country);
         homePage.clickToCountry(locale.getCountry());

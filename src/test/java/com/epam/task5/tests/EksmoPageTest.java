@@ -85,12 +85,13 @@ public class EksmoPageTest extends BaseForAllTests {
     @Test(description = "verify that displayed item corresponds to the selected category",
             dataProvider = "bookCategories")
     public void isCategoryCorrect(String category, String expected) {
-        Item item = new Item(driver);
         driver.navigate().to(EKSMO_PAGE_LINK);
+        Item item = new Item();
+        item.setCategory(expected);
         CategoryPage categoryPage = new EksmoPage(driver).selectCategory(category);
         ItemPage itemPage = categoryPage.selectItem();
         itemPage.readAllInformation();
-        Assert.assertEquals(item.getCategory(), expected, "the item category does not match the selected category");
+        Assert.assertEquals(itemPage.getCategory(), item.getCategory(), "the item category does not match the selected category");
     }
 
     @DataProvider(name = "bookCategories", parallel = false)

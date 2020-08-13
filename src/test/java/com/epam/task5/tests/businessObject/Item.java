@@ -1,26 +1,22 @@
 package com.epam.task5.tests.businessObject;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
 public class Item {
+    String category;
+    String size;
 
-    WebDriver driver;
-    private static final By ACTUAL_ITEM_CATEGORY = By.xpath("//div[@class='params']//div//span[b='Жанры/тематика']/following::span[1]");
-    private static final By ITEMS_SIZE_LOCATOR = By.xpath("//label[@data-size-name]");
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-    public Item(WebDriver driver) {
-        this.driver = driver;
+    public void setSize(String size) {
+        this.size = size;
     }
 
     public String getCategory() {
-        String actualCategory = driver.findElement(ACTUAL_ITEM_CATEGORY).getText();
-        return actualCategory;
+        return category;
     }
 
-    public void selectSize() {
-        if (driver.findElement(ITEMS_SIZE_LOCATOR).isDisplayed())
-            driver.findElement(ITEMS_SIZE_LOCATOR).click();
+    public String getSize() {
+        return size;
     }
-
 }

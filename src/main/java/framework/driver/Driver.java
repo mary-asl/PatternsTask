@@ -1,6 +1,6 @@
-package com.epam.task5.framework.driver;
+package framework.driver;
 
-import com.epam.task5.framework.exception.UnknownDriverTypeException;
+import framework.exception.UnknownDriverTypeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;

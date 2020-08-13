@@ -1,4 +1,4 @@
-package com.epam.task5.framework.util;
+package framework.util;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;

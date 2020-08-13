@@ -1,10 +1,10 @@
-package com.epam.task5.tests.pageObject;
+package pageObject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import com.epam.task5.framework.util.Screenshoter;
+import framework.util.Screenshoter;
 
 import java.util.*;
 

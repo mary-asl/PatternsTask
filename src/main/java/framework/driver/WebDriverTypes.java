@@ -1,4 +1,4 @@
-package com.epam.task5.framework.driver;
+package framework.driver;
 
 public enum  WebDriverTypes {
     FIREFOX, CHROME

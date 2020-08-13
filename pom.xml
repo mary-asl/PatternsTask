@@ -66,6 +66,12 @@
             <artifactId>ashot</artifactId>
             <version>1.5.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.1.0</version>
+            <scope>compile</scope>
+        </dependency>
 
     </dependencies>
 

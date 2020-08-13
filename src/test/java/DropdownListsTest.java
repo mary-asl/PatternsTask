@@ -1,10 +1,8 @@
-package com.epam.task5.tests;
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import com.epam.task5.tests.businessObject.Locale;
-import com.epam.task5.tests.pageObject.HomePage;
+import businessObject.Locale;
+import pageObject.HomePage;
 
 public class DropdownListsTest extends BaseForAllTests {
 

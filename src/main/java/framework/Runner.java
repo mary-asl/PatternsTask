@@ -1,4 +1,4 @@
-package com.epam.task5.framework;
+package framework;
 
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;

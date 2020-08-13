@@ -1,4 +1,4 @@
-package com.epam.task5.tests.pageObject;
+package pageObject;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

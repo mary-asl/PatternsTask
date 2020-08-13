@@ -1,12 +1,10 @@
-package com.epam.task5.tests;
-
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import com.epam.task5.tests.pageObject.CategoryPage;
-import com.epam.task5.tests.pageObject.HomePage;
+import pageObject.CategoryPage;
+import pageObject.HomePage;
 
 import java.util.concurrent.TimeUnit;
 

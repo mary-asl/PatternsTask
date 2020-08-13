@@ -1,15 +1,13 @@
-package com.epam.task5.tests;
-
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import com.epam.task5.tests.businessObject.Item;
-import com.epam.task5.tests.pageObject.CategoryPage;
-import com.epam.task5.tests.pageObject.EksmoPage;
-import com.epam.task5.tests.pageObject.HomePage;
-import com.epam.task5.tests.pageObject.ItemPage;
+import businessObject.Item;
+import pageObject.CategoryPage;
+import pageObject.EksmoPage;
+import pageObject.HomePage;
+import pageObject.ItemPage;
 
 import java.util.List;
 

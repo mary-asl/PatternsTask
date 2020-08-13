@@ -1,4 +1,4 @@
-package com.epam.task5.framework.exception;
+package framework.exception;
 
 public class UnknownDriverTypeException extends RuntimeException {
 

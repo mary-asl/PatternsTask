@@ -1,4 +1,4 @@
-package com.epam.task5.tests.businessObject;
+package businessObject;
 
 public class Item {
     String category;

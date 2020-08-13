@@ -19,7 +19,7 @@ public class DropdownListsTest extends BaseForAllTests {
         HomePage homePage = new HomePage(driver).hoverToChangeLocaleBtn();
         locale.setCountry(country);
         homePage.clickToCountry(locale.getCountry());
-        Assert.assertEquals(locale.getCurrentLocale().getText(), expectedLocation, "current location wasn't change");
+        Assert.assertEquals(homePage.getCurrentLocale().getText(), expectedLocation, "current location wasn't change");
     }
 
     @DataProvider(name = "locationDataProvider", parallel = false)

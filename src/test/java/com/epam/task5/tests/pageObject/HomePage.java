@@ -13,6 +13,7 @@ public class HomePage extends AbstractPage {
     private static final By SEARCH_INPUT_LOCATOR = By.id("tbSrch");
     private static final By SEARCH_BTN_LOCATOR = By.id("btnSrch");
     private static final By CHANGE_LOCALE_BTN_LOCATOR = By.xpath("//li[@class = 'item change-locale']/span");
+    private static final By GEO_LOCATION_TEXT_LOCATOR = By.xpath("//span[@class='geo j-geocity-text']");
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -49,6 +50,11 @@ public class HomePage extends AbstractPage {
                 break;
         }
         return this;
+    }
+
+    public WebElement getCurrentLocale() {
+        waitForElementVisible(GEO_LOCATION_TEXT_LOCATOR);
+        return getDriver().findElement(GEO_LOCATION_TEXT_LOCATOR);
     }
 
     public HomePage cleanInputSearch() {

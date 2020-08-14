@@ -1,12 +1,10 @@
 package pageObject;
 
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import framework.util.Screenshoter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
-import java.util.*;
+import java.util.List;
 
 public class CategoryPage extends AbstractPage {
 
@@ -20,48 +18,47 @@ public class CategoryPage extends AbstractPage {
     private static final By ITEMS_NAME_LOCATOR = By.xpath("//span[@class='goods-name c-text-sm']");
     private static final By SEARCH_INPUT_LOCATOR = By.id("tbSrch");
 
-    public CategoryPage(WebDriver driver) {
-        super(driver);
+    public CategoryPage() throws Exception {
     }
 
-    public ItemPage selectItem() {
+    public ItemPage selectItem() throws Exception {
         waitForElementVisible(ITEM_FROM_LIST_LOCATOR);
-        getDriver().findElement(ITEM_FROM_LIST_LOCATOR).click();
-        return new ItemPage(getDriver());
+        driver.findElement(ITEM_FROM_LIST_LOCATOR).click();
+        return new ItemPage();
     }
 
     public String getSearchingItemName() {
         waitForElementVisible(ITEMS_NAME_LOCATOR);
-        return getDriver().findElement(ITEMS_NAME_LOCATOR).getText();
+        return driver.findElement(ITEMS_NAME_LOCATOR).getText();
     }
 
     public String getInputValue() {
         waitForElementVisible(SEARCH_INPUT_LOCATOR);
-        return getDriver().findElement(SEARCH_INPUT_LOCATOR).getAttribute("value");
+        return driver.findElement(SEARCH_INPUT_LOCATOR).getAttribute("value");
     }
 
     public List<WebElement> getItemsRate() {
         waitForElementVisible(ITEMS_RATE_LOCATOR);
-        return getDriver().findElements(ITEMS_RATE_LOCATOR);
+        return driver.findElements(ITEMS_RATE_LOCATOR);
     }
 
     public List<WebElement> getItemsPrice() {
-        getDriver().navigate().refresh();
+        driver.navigate().refresh();
         waitForElementPresent(ITEMS_PRICE_LOCATOR);
-        return getDriver().findElements(ITEMS_PRICE_LOCATOR);
+        return driver.findElements(ITEMS_PRICE_LOCATOR);
     }
 
     public List<WebElement> getItemsDiscount() {
-        getDriver().navigate().refresh();
+        driver.navigate().refresh();
         waitForElementPresent(ITEMS_DISCOUNTS_LOCATOR);
-        return getDriver().findElements(ITEMS_DISCOUNTS_LOCATOR);
+        return driver.findElements(ITEMS_DISCOUNTS_LOCATOR);
     }
 
     public CategoryPage filterByRate() {
         waitForElementVisible(FILTER_BY_RATE_LOCATOR);
         highlightElement(FILTER_BY_RATE_LOCATOR);
-        getDriver().findElement(FILTER_BY_RATE_LOCATOR).click();
-        Screenshoter.makeFullPageScreenshot(getDriver());
+        driver.findElement(FILTER_BY_RATE_LOCATOR).click();
+        Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_RATE_LOCATOR);
         return this;
     }
@@ -69,8 +66,8 @@ public class CategoryPage extends AbstractPage {
     public CategoryPage filterByPrice() {
         waitForElementVisible(FILTER_BY_PRICE_BTN_LOCATOR);
         highlightElement(FILTER_BY_PRICE_BTN_LOCATOR);
-        getDriver().findElement(FILTER_BY_PRICE_BTN_LOCATOR).click();
-        Screenshoter.makeFullPageScreenshot(getDriver());
+        driver.findElement(FILTER_BY_PRICE_BTN_LOCATOR).click();
+        Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_PRICE_BTN_LOCATOR);
         return this;
     }
@@ -78,41 +75,10 @@ public class CategoryPage extends AbstractPage {
     public CategoryPage filterByDiscount() {
         waitForElementVisible(FILTER_BY_DISCOUNT_BTN_LOCATOR);
         highlightElement(FILTER_BY_DISCOUNT_BTN_LOCATOR);
-        getDriver().findElement(FILTER_BY_DISCOUNT_BTN_LOCATOR).click();
-        Screenshoter.makeFullPageScreenshot(getDriver());
+        driver.findElement(FILTER_BY_DISCOUNT_BTN_LOCATOR).click();
+        Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_DISCOUNT_BTN_LOCATOR);
         return this;
-    }
-
-    public List<Integer> parseIntPrices() {
-        List<Integer> intPrices = new ArrayList<Integer>();
-        List<WebElement> prices = getItemsPrice();
-
-        for (int i = 0; i < prices.size(); i++) {
-            intPrices.add(Integer.parseInt(StringUtils
-                    .substringBefore(prices.get(i).getText()
-                            .replaceAll("\\s+", ""), "тг")));
-        }
-        return intPrices;
-    }
-
-    public List<Integer> parseIntRates() {
-        List<Integer> intRates = new ArrayList<Integer>();
-
-        for (int i = 0; i < getItemsRate().size(); i++) {
-            intRates.add(Integer.parseInt(getItemsRate().get(i).getText()));
-        }
-        return intRates;
-    }
-
-    public List<Double> parseDoubleDiscount() {
-        List<Double> doubleDiscount = new ArrayList<Double>();
-        List<WebElement> discounts = getItemsDiscount();
-
-        for (int i = 0; i < discounts.size(); i++) {
-            doubleDiscount.add(Double.parseDouble(discounts.get(i).getText().substring(0, 3)));
-        }
-        return doubleDiscount;
     }
 
 }

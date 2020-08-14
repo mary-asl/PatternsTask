@@ -1,3 +1,4 @@
+import framework.util.WebElementsParser;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -11,20 +12,20 @@ import pageObject.ItemPage;
 
 import java.util.List;
 
-
 public class EksmoPageTest extends BaseForAllTests {
 
     private static final String EKSMO_PAGE_LINK = "https://www.wildberries.kz/brands/eksmo";
 
     public EksmoPageTest() throws Exception {
+        super();
     }
 
     @Test(description = "verify that items filtered by discount")
     @Parameters({"category"})
-    public void filterByDiscount(@Optional(value = "Psychology") String category) {
+    public void filterByDiscount(@Optional(value = "Psychology") String category) throws Exception {
         boolean actual = false;
-        CategoryPage categoryPage = new HomePage(driver).clickBrandLogo().selectCategory(category).filterByDiscount();
-        List<Double> doubleDiscounts = categoryPage.parseDoubleDiscount();
+        CategoryPage categoryPage = new HomePage().clickBrandLogo().selectCategory(category).filterByDiscount();
+        List<Double> doubleDiscounts = WebElementsParser.parseDiscountsToDouble(categoryPage.getItemsDiscount());
         outerloop:
         for (int i = 0; i < doubleDiscounts.size(); i++) {
             for (int j = i + 1; j < doubleDiscounts.size(); j++) {
@@ -39,10 +40,10 @@ public class EksmoPageTest extends BaseForAllTests {
     }
 
     @Test(description = "verify that items filtered by rate")
-    public void filterByRate() {
-        CategoryPage categoryPage = new CategoryPage(driver).filterByRate();
+    public void filterByRate() throws Exception {
+        CategoryPage categoryPage = new CategoryPage().filterByRate();
         boolean actual = false;
-        List<Integer> integerRates = categoryPage.parseIntRates();
+        List<Integer> integerRates = WebElementsParser.parseRatesToInt(categoryPage.getItemsRate());
         outerloop:
         for (int i = 0; i < integerRates.size(); i++) {
             for (int j = i + 1; j < integerRates.size(); j++) {
@@ -57,10 +58,10 @@ public class EksmoPageTest extends BaseForAllTests {
     }
 
     @Test(description = "verify that items filtered by price")
-    public void filterByPrice() {
+    public void filterByPrice() throws Exception {
         boolean actual = false;
-        CategoryPage categoryPage = new CategoryPage(driver).filterByPrice();
-        List<Integer> integerPrices = categoryPage.parseIntPrices();
+        CategoryPage categoryPage = new CategoryPage().filterByPrice();
+        List<Integer> integerPrices = WebElementsParser.parsePricesToInt(categoryPage.getItemsPrice());
         outerloop:
         for (int i = 0; i < integerPrices.size(); i++) {
             for (int j = i + 1; j < integerPrices.size(); j++) {
@@ -74,19 +75,19 @@ public class EksmoPageTest extends BaseForAllTests {
     }
 
     @Test(description = "Verify that categories are displayed on the page")
-    public void verifyDisplayedCategory() {
+    public void verifyDisplayedCategory() throws Exception {
         driver.navigate().to(EKSMO_PAGE_LINK);
-        EksmoPage eksmoPage = new EksmoPage(driver);
+        EksmoPage eksmoPage = new EksmoPage();
         Assert.assertTrue(eksmoPage.findCategoryBanners().isDisplayed(), "there are no categories on the shop's page");
     }
 
     @Test(description = "verify that displayed item corresponds to the selected category",
             dataProvider = "bookCategories")
-    public void isCategoryCorrect(String category, String expected) {
-        driver.navigate().to(EKSMO_PAGE_LINK);
+    public void isCategoryCorrect(String category, String expected) throws Exception {
         Item item = new Item();
         item.setCategory(expected);
-        CategoryPage categoryPage = new EksmoPage(driver).selectCategory(category);
+        driver.navigate().to(EKSMO_PAGE_LINK);
+        CategoryPage categoryPage = new EksmoPage().selectCategory(category);
         ItemPage itemPage = categoryPage.selectItem();
         itemPage.readAllInformation();
         Assert.assertEquals(itemPage.getCategory(), item.getCategory(), "the item category does not match the selected category");

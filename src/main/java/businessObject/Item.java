@@ -1,8 +1,8 @@
 package businessObject;
 
 public class Item {
-    String category;
-    String size;
+    private String category;
+    private String size;
 
     public void setCategory(String category) {
         this.category = category;

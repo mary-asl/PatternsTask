@@ -1,20 +1,26 @@
-import framework.driver.Driver;
+import framework.driver.DriverDecorator;
+import framework.driver.DriverSingleton;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 
 public abstract class BaseForAllTests {
 
     private static final String BASE_URL = "https://www.wildberries.kz";
-    public Logger logger = LogManager.getLogger();
+    private Logger logger = LogManager.getLogger();
 
     WebDriver driver;
 
     public BaseForAllTests() throws Exception {
-        this.driver = Driver.getWebDriver();
+        this.driver = DriverSingleton.getWebDriver();
+    }
+
+    @BeforeClass
+    public void wrapWebDriver(){
+        driver = new DriverDecorator(driver);
     }
 
     @BeforeClass
@@ -26,9 +32,9 @@ public abstract class BaseForAllTests {
         }
     }
 
-    @AfterClass
+    @AfterSuite
     public void quit() {
-        Driver.closeBrowser(driver);
+        DriverSingleton.closeBrowser(driver);
     }
 
 }

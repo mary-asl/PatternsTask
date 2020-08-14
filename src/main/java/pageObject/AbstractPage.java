@@ -1,19 +1,15 @@
 package pageObject;
 
+import framework.driver.DriverSingleton;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class AbstractPage {
-    public static final int WAIT_FOR_ELEMENT_SECONDS = 30;
-    private WebDriver driver;
+    private static final int WAIT_FOR_ELEMENT_SECONDS = 30;
+    protected WebDriver driver = DriverSingleton.getWebDriver();
 
-    public AbstractPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    protected WebDriver getDriver() {
-        return this.driver;
+    protected AbstractPage() throws Exception {
     }
 
     public boolean isElementPresent(By locator) {
@@ -34,7 +30,7 @@ public abstract class AbstractPage {
 
     public void redrawElement(By locator) {
         new  WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS).until(ExpectedConditions.
-                refreshed(ExpectedConditions.stalenessOf(getDriver().findElement(locator))));
+                refreshed(ExpectedConditions.stalenessOf(driver.findElement(locator))));
     }
 
     public void highlightElement(By locator){

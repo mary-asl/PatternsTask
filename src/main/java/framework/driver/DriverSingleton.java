@@ -1,41 +1,42 @@
 package framework.driver;
 
+import framework.driver.driverCreators.ChromeDriverCreator;
+import framework.driver.driverCreators.FirefoxDriverCreator;
 import framework.exception.UnknownDriverTypeException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Driver {
+public class DriverSingleton {
 
     private static WebDriverTypes defaultDriverType = WebDriverTypes.FIREFOX;
 
     private static WebDriver driver;
 
-    private Driver(WebDriver driver) {
-        this.driver = driver;
+    private DriverSingleton() {
     }
 
     public static Logger logger = LogManager.getLogger();
 
     public static WebDriver getWebDriver(WebDriverTypes type) throws Exception {
-        switch (type) {
-            case FIREFOX: {
-                System.setProperty("webdriver.gecko.driver", "src/main/resources/webdrivers/geckodriver.exe");
-                driver = new FirefoxDriver();
-                break;
+        if (driver == null) {
+
+            switch (type) {
+                case FIREFOX: {
+                    driver = new FirefoxDriverCreator().factoryMethod();
+                    break;
+                }
+                case CHROME: {
+                    driver = new ChromeDriverCreator().factoryMethod();
+                    break;
+                }
+                default:
+                    throw new UnknownDriverTypeException("Unknown web driver specified: " + type);
             }
-            case CHROME: {
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/webdrivers/chromedriver.exe");
-                driver = new ChromeDriver();
-                break;
-            }
-            default:
-                throw new UnknownDriverTypeException("Unknown web driver specified: " + type);
         }
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         return driver;

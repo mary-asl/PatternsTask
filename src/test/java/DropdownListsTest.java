@@ -12,9 +12,9 @@ public class DropdownListsTest extends BaseForAllTests {
 
     @Test(description = "verify that current location was changed after changed the country",
             dataProvider = "locationDataProvider")
-    public void verifyCurrentLocation(String country, String expectedLocation) {
+    public void verifyCurrentLocation(String country, String expectedLocation) throws Exception {
         Locale locale = new Locale();
-        HomePage homePage = new HomePage(driver).hoverToChangeLocaleBtn();
+        HomePage homePage = new HomePage().hoverToChangeLocaleBtn();
         locale.setCountry(country);
         homePage.clickToCountry(locale.getCountry());
         Assert.assertEquals(homePage.getCurrentLocale().getText(), expectedLocation, "current location wasn't change");

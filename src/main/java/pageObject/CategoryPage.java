@@ -23,7 +23,7 @@ public class CategoryPage extends AbstractPage {
     }
 
     public ItemPage selectItem() throws Exception {
-        getWebElement(ITEM_FROM_LIST_LOCATOR).click();
+        click(ITEM_FROM_LIST_LOCATOR);
         return new ItemPage();
     }
 
@@ -41,20 +41,18 @@ public class CategoryPage extends AbstractPage {
     }
 
     public List<WebElement> getItemsPrice() {
-        driver.navigate().refresh();
-        waitForElementPresent(ITEMS_PRICE_LOCATOR);
+        refresh();
         return getWebElements(ITEMS_PRICE_LOCATOR);
     }
 
     public List<WebElement> getItemsDiscount() {
-        driver.navigate().refresh();
-        waitForElementPresent(ITEMS_DISCOUNTS_LOCATOR);
+        refresh();
         return getWebElements(ITEMS_DISCOUNTS_LOCATOR);
     }
 
     public CategoryPage filterByRate() {
         highlightElement(FILTER_BY_RATE_LOCATOR);
-        getWebElement(FILTER_BY_RATE_LOCATOR).click();
+        click(FILTER_BY_RATE_LOCATOR);
         Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_RATE_LOCATOR);
         return this;
@@ -62,7 +60,7 @@ public class CategoryPage extends AbstractPage {
 
     public CategoryPage filterByPrice() {
         highlightElement(FILTER_BY_PRICE_BTN_LOCATOR);
-        getWebElement(FILTER_BY_PRICE_BTN_LOCATOR).click();
+        click(FILTER_BY_PRICE_BTN_LOCATOR);
         Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_PRICE_BTN_LOCATOR);
         return this;
@@ -70,7 +68,7 @@ public class CategoryPage extends AbstractPage {
 
     public CategoryPage filterByDiscount() {
         highlightElement(FILTER_BY_DISCOUNT_BTN_LOCATOR);
-        getWebElement(FILTER_BY_DISCOUNT_BTN_LOCATOR).click();
+        click(FILTER_BY_DISCOUNT_BTN_LOCATOR);
         Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_DISCOUNT_BTN_LOCATOR);
         return this;

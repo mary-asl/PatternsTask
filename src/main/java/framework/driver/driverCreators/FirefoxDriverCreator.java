@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class FirefoxDriverCreator implements DriverCreator, getRemoteDriver {
+public class FirefoxDriverCreator implements DriverCreator {
     @Override
     public WebDriver getDriver() {
         System.setProperty("webdriver.gecko.driver", "src/main/resources/webdrivers/geckodriver.exe");

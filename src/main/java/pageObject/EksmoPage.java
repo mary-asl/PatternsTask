@@ -12,7 +12,6 @@ public class EksmoPage extends AbstractPage {
     public EksmoPage() throws Exception {
     }
 
-
     public WebElement findCategoryBanners() {
         return getWebElement(CATEGORIES_LOCATOR);
     }
@@ -20,11 +19,9 @@ public class EksmoPage extends AbstractPage {
     public CategoryPage selectCategory(String category) throws Exception {
         switch (category) {
             case ("Psychology"):
-                waitForElementEnabled(PSYCHOLOGY_CATEGORY_LOCATOR);
                 getWebElement(PSYCHOLOGY_CATEGORY_LOCATOR).click();
                 break;
             case ("Cooking"):
-                waitForElementEnabled(COOKING_CATEGORY_LOCATOR);
                 getWebElement(COOKING_CATEGORY_LOCATOR).click();
                 break;
         }

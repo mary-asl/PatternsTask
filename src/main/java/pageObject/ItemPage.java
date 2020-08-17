@@ -15,7 +15,7 @@ public class ItemPage extends AbstractPage {
     }
 
     public SignInPage addToFavorites() throws Exception {
-        getWebElement(FAVORITES_BTN_LOCATOR).click();
+        click(FAVORITES_BTN_LOCATOR);
         return new SignInPage();
     }
 
@@ -24,15 +24,14 @@ public class ItemPage extends AbstractPage {
     }
 
     public void selectSize() {
-        if (getWebElement(ITEMS_SIZE_LOCATOR).isDisplayed())
-            getWebElement(ITEMS_SIZE_LOCATOR).click();
+        getWebElement(ITEMS_SIZE_LOCATOR).click();
     }
 
     public ItemPage readAllInformation() {
         int elementPosition = getWebElement(READ_ALL_INFORM_BTN_LOCATOR).getLocation().getY();
         String js = String.format("window.scroll(0, %s)", elementPosition);
         ((JavascriptExecutor) driver).executeScript(js);
-        getWebElement(READ_ALL_INFORM_BTN_LOCATOR).click();
+        click(READ_ALL_INFORM_BTN_LOCATOR);
         return this;
     }
 

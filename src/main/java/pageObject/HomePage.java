@@ -25,25 +25,25 @@ public class HomePage extends AbstractPage {
     public HomePage clickToCountry(String country) {
         switch (country) {
             case ("Belarus"):
-                getWebElement(By.xpath("//span[@class='c-flag-by']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-by']/../a"));
                 break;
             case ("Россия"):
-                getWebElement(By.xpath("//span[@class='c-flag-ru']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-ru']/../a"));
                 break;
             case ("Kazakhstan"):
-                getWebElement(By.xpath("//span[@class='c-flag-kz']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-kz']/../a"));
                 break;
             case ("Armenia"):
-                getWebElement(By.xpath("//span[@class='c-flag-am']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-am']/../a"));
                 break;
             case ("Kyrgyzstan"):
-                getWebElement(By.xpath("//span[@class='c-flag-kg']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-kg']/../a"));
                 break;
             case ("Poland"):
-                getWebElement(By.xpath("//span[@class='c-flag-pl']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-pl']/../a"));
                 break;
             case ("Slovakia"):
-                getWebElement(By.xpath("//span[@class='c-flag-sk']/../a")).click();
+                click(By.xpath("//span[@class='c-flag-sk']/../a"));
                 break;
         }
         return this;
@@ -61,22 +61,20 @@ public class HomePage extends AbstractPage {
     public CategoryPage searchForItem(String item) throws Exception {
         WebElement input = getWebElement(SEARCH_INPUT_LOCATOR);
         new Actions(driver).sendKeys(input, item).build().perform();
-        getWebElement(SEARCH_BTN_LOCATOR).click();
+        click(SEARCH_BTN_LOCATOR);
         return new CategoryPage();
     }
 
     public EksmoPage clickBrandLogo() throws Exception {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,4700)");
         WebElement buttonNext = getWebElement(BUTTON_NEXT_BRAND_LOCATOR);
-        waitForElementVisible(BUTTON_NEXT_BRAND_LOCATOR);
         String js = String.format("window.scroll(0, %s)", buttonNext.getLocation().getY());
         ((JavascriptExecutor) driver).executeScript(js);
-        waitForElementEnabled(BUTTON_NEXT_BRAND_LOCATOR);
         do {
             buttonNext.click();
         }
         while (!getWebElement(EKSMO_LOGO_LOCATOR).isDisplayed());
-        getWebElement(EKSMO_LOGO_LOCATOR).click();
+        click(EKSMO_LOGO_LOCATOR);
         return new EksmoPage();
     }
 }

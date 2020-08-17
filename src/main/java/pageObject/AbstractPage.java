@@ -40,6 +40,14 @@ public abstract class AbstractPage {
         return driver.findElements(by);
     }
 
+    public void refresh() {
+        driver.navigate().refresh();
+    }
+
+    public void click(By locator) {
+        getWebElement(locator).click();
+    }
+
     public void waitForElementEnabled(By locator) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS).until(ExpectedConditions.elementToBeClickable(locator));
     }

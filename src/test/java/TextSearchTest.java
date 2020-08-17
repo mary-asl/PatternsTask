@@ -9,6 +9,8 @@ import pageObject.ItemPage;
 
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Stream;
 
 public class TextSearchTest extends BaseForAllTests {
 
@@ -20,18 +22,19 @@ public class TextSearchTest extends BaseForAllTests {
             dataProvider = "searchingItems")
     public void isItemFound(String searchingItem) throws Exception {
         CategoryPage categoryPage = new HomePage().cleanInputSearch().searchForItem(searchingItem);
-        boolean actual = false;
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        AtomicBoolean actual = new AtomicBoolean(false);
+
         String searchingItemActualName = categoryPage.getSearchingItemName();
         String[] subStr = categoryPage.getInputValue().split(" ");
-        for (int i = 0; i < subStr.length; i++) {
-            if (!StringUtils.containsIgnoreCase(searchingItemActualName, subStr[i])) {
-                actual = false;
+
+        for(String el : subStr) {
+            if (!StringUtils.containsIgnoreCase(searchingItemActualName, el)) {
+                actual.set(false);
                 break;
             } else
-                actual = true;
+                actual.set(true);
         }
-        Assert.assertTrue(actual, "expected item is not found");
+        Assert.assertTrue(actual.get(), "expected item is not found");
     }
 
     @Test(description = "verify that page title changed to searching item's name",

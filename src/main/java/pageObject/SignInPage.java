@@ -10,8 +10,7 @@ public class SignInPage extends AbstractPage {
     }
 
     public Boolean signInByPhoneNum() {
-        waitForElementPresent(SIGN_IN_FORM_LOCATOR);
-        return driver.findElement(SIGN_IN_FORM_LOCATOR).isDisplayed();
+        return getWebElement(SIGN_IN_FORM_LOCATOR).isDisplayed();
     }
 
 }

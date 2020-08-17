@@ -15,31 +15,29 @@ public class ItemPage extends AbstractPage {
     }
 
     public SignInPage addToFavorites() throws Exception {
-        driver.findElement(FAVORITES_BTN_LOCATOR).click();
+        getWebElement(FAVORITES_BTN_LOCATOR).click();
         return new SignInPage();
     }
 
     public String getCategory() {
-        String actualCategory = driver.findElement(ACTUAL_ITEM_CATEGORY).getText();
-        return actualCategory;
+        return getText(ACTUAL_ITEM_CATEGORY);
     }
 
     public void selectSize() {
-        if (driver.findElement(ITEMS_SIZE_LOCATOR).isDisplayed())
-            driver.findElement(ITEMS_SIZE_LOCATOR).click();
+        if (getWebElement(ITEMS_SIZE_LOCATOR).isDisplayed())
+            getWebElement(ITEMS_SIZE_LOCATOR).click();
     }
 
     public ItemPage readAllInformation() {
-        int elementPosition = driver.findElement(READ_ALL_INFORM_BTN_LOCATOR).getLocation().getY();
+        int elementPosition = getWebElement(READ_ALL_INFORM_BTN_LOCATOR).getLocation().getY();
         String js = String.format("window.scroll(0, %s)", elementPosition);
-        waitForElementVisible(READ_ALL_INFORM_BTN_LOCATOR);
         ((JavascriptExecutor) driver).executeScript(js);
-        driver.findElement(READ_ALL_INFORM_BTN_LOCATOR).click();
+        getWebElement(READ_ALL_INFORM_BTN_LOCATOR).click();
         return this;
     }
 
-    public String getItemsNumber(){
-        return driver.findElement(ITEMS_SKU_LOCATOR).getText();
+    public String getItemsNumber() {
+        return getText(ITEMS_SKU_LOCATOR);
     }
 
 }

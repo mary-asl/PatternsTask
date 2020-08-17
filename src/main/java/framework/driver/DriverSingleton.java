@@ -25,11 +25,11 @@ public class DriverSingleton {
 
             switch (type) {
                 case FIREFOX: {
-                    driver = new FirefoxDriverCreator().factoryMethod();
+                    driver = new FirefoxDriverCreator().getDriver();
                     break;
                 }
                 case CHROME: {
-                    driver = new ChromeDriverCreator().factoryMethod();
+                    driver = new ChromeDriverCreator().getDriver();
                     break;
                 }
                 default:

@@ -18,8 +18,7 @@ public class HomePage extends AbstractPage {
     }
 
     public HomePage hoverToChangeLocaleBtn(){
-        waitForElementVisible(CHANGE_LOCALE_BTN_LOCATOR);
-        new Actions(driver).moveToElement(driver.findElement(CHANGE_LOCALE_BTN_LOCATOR)).perform();
+        new Actions(driver).moveToElement(getWebElement(CHANGE_LOCALE_BTN_LOCATOR)).perform();
         return this;
     }
 
@@ -51,21 +50,18 @@ public class HomePage extends AbstractPage {
     }
 
     public WebElement getCurrentLocale() {
-        waitForElementVisible(GEO_LOCATION_TEXT_LOCATOR);
-        return driver.findElement(GEO_LOCATION_TEXT_LOCATOR);
+        return getWebElement(GEO_LOCATION_TEXT_LOCATOR);
     }
 
     public HomePage cleanInputSearch() {
-        driver.findElement(SEARCH_INPUT_LOCATOR).clear();
+        getWebElement(SEARCH_INPUT_LOCATOR).clear();
         return this;
     }
 
     public CategoryPage searchForItem(String item) throws Exception {
-        waitForElementVisible(SEARCH_INPUT_LOCATOR);
-        WebElement input = driver.findElement(SEARCH_INPUT_LOCATOR);
+        WebElement input = getWebElement(SEARCH_INPUT_LOCATOR);
         new Actions(driver).sendKeys(input, item).build().perform();
-        waitForElementVisible(SEARCH_BTN_LOCATOR);
-        driver.findElement(SEARCH_BTN_LOCATOR).click();
+        getWebElement(SEARCH_BTN_LOCATOR).click();
         return new CategoryPage();
     }
 

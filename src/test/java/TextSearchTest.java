@@ -22,9 +22,10 @@ public class TextSearchTest extends BaseForAllTests {
         CategoryPage categoryPage = new HomePage().cleanInputSearch().searchForItem(searchingItem);
         boolean actual = false;
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String searchingItemActualName = categoryPage.getSearchingItemName();
         String[] subStr = categoryPage.getInputValue().split(" ");
         for (int i = 0; i < subStr.length; i++) {
-            if (!StringUtils.containsIgnoreCase(categoryPage.getSearchingItemName(), subStr[i])) {
+            if (!StringUtils.containsIgnoreCase(searchingItemActualName, subStr[i])) {
                 actual = false;
                 break;
             } else

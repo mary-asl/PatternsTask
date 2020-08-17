@@ -14,19 +14,18 @@ public class EksmoPage extends AbstractPage {
 
 
     public WebElement findCategoryBanners() {
-        waitForElementVisible(CATEGORIES_LOCATOR);
-        return driver.findElement(CATEGORIES_LOCATOR);
+        return getWebElement(CATEGORIES_LOCATOR);
     }
 
     public CategoryPage selectCategory(String category) throws Exception {
-        switch (category){
-            case("Psychology"):
+        switch (category) {
+            case ("Psychology"):
                 waitForElementEnabled(PSYCHOLOGY_CATEGORY_LOCATOR);
-                driver.findElement(PSYCHOLOGY_CATEGORY_LOCATOR).click();
+                getWebElement(PSYCHOLOGY_CATEGORY_LOCATOR).click();
                 break;
-            case("Cooking"):
+            case ("Cooking"):
                 waitForElementEnabled(COOKING_CATEGORY_LOCATOR);
-                driver.findElement(COOKING_CATEGORY_LOCATOR).click();
+                getWebElement(COOKING_CATEGORY_LOCATOR).click();
                 break;
         }
         return new CategoryPage();

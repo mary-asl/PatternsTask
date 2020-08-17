@@ -2,6 +2,7 @@ package pageObject;
 
 import framework.util.Screenshoter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -22,60 +23,54 @@ public class CategoryPage extends AbstractPage {
     }
 
     public ItemPage selectItem() throws Exception {
-        waitForElementVisible(ITEM_FROM_LIST_LOCATOR);
-        driver.findElement(ITEM_FROM_LIST_LOCATOR).click();
+        getWebElement(ITEM_FROM_LIST_LOCATOR).click();
         return new ItemPage();
     }
 
     public String getSearchingItemName() {
-        waitForElementVisible(ITEMS_NAME_LOCATOR);
-        return driver.findElement(ITEMS_NAME_LOCATOR).getText();
+        ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,200)");
+        return getText(ITEMS_NAME_LOCATOR);
     }
 
     public String getInputValue() {
-        waitForElementVisible(SEARCH_INPUT_LOCATOR);
-        return driver.findElement(SEARCH_INPUT_LOCATOR).getAttribute("value");
+        return getWebElement(SEARCH_INPUT_LOCATOR).getAttribute("value");
     }
 
     public List<WebElement> getItemsRate() {
-        waitForElementVisible(ITEMS_RATE_LOCATOR);
-        return driver.findElements(ITEMS_RATE_LOCATOR);
+        return getWebElements(ITEMS_RATE_LOCATOR);
     }
 
     public List<WebElement> getItemsPrice() {
         driver.navigate().refresh();
         waitForElementPresent(ITEMS_PRICE_LOCATOR);
-        return driver.findElements(ITEMS_PRICE_LOCATOR);
+        return getWebElements(ITEMS_PRICE_LOCATOR);
     }
 
     public List<WebElement> getItemsDiscount() {
         driver.navigate().refresh();
         waitForElementPresent(ITEMS_DISCOUNTS_LOCATOR);
-        return driver.findElements(ITEMS_DISCOUNTS_LOCATOR);
+        return getWebElements(ITEMS_DISCOUNTS_LOCATOR);
     }
 
     public CategoryPage filterByRate() {
-        waitForElementVisible(FILTER_BY_RATE_LOCATOR);
         highlightElement(FILTER_BY_RATE_LOCATOR);
-        driver.findElement(FILTER_BY_RATE_LOCATOR).click();
+        getWebElement(FILTER_BY_RATE_LOCATOR).click();
         Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_RATE_LOCATOR);
         return this;
     }
 
     public CategoryPage filterByPrice() {
-        waitForElementVisible(FILTER_BY_PRICE_BTN_LOCATOR);
         highlightElement(FILTER_BY_PRICE_BTN_LOCATOR);
-        driver.findElement(FILTER_BY_PRICE_BTN_LOCATOR).click();
+        getWebElement(FILTER_BY_PRICE_BTN_LOCATOR).click();
         Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_PRICE_BTN_LOCATOR);
         return this;
     }
 
     public CategoryPage filterByDiscount() {
-        waitForElementVisible(FILTER_BY_DISCOUNT_BTN_LOCATOR);
         highlightElement(FILTER_BY_DISCOUNT_BTN_LOCATOR);
-        driver.findElement(FILTER_BY_DISCOUNT_BTN_LOCATOR).click();
+        getWebElement(FILTER_BY_DISCOUNT_BTN_LOCATOR).click();
         Screenshoter.makeFullPageScreenshot(driver);
         unHighlightElement(FILTER_BY_DISCOUNT_BTN_LOCATOR);
         return this;

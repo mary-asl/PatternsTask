@@ -5,8 +5,10 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public abstract class AbstractPage {
-    private static final int WAIT_FOR_ELEMENT_SECONDS = 30;
+    private static final int WAIT_FOR_ELEMENT_SECONDS = 10;
     protected WebDriver driver = DriverSingleton.getWebDriver();
 
     protected AbstractPage() throws Exception {
@@ -22,6 +24,21 @@ public abstract class AbstractPage {
 
     public void waitForElementVisible(By locator) {
         new WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+
+    public String getText(By by) {
+        waitForElementVisible(by);
+        return driver.findElement(by).getText();
+    }
+
+    public WebElement getWebElement(By by) {
+        waitForElementVisible(by);
+        return driver.findElement(by);
+    }
+
+    public List<WebElement> getWebElements(By by) {
+        waitForElementVisible(by);
+        return driver.findElements(by);
     }
 
     public void waitForElementEnabled(By locator) {

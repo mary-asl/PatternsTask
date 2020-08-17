@@ -6,5 +6,5 @@ import java.net.MalformedURLException;
 
 public interface getRemoteDriver {
 
-    WebDriver getRemoteDriver() throws MalformedURLException;
+    WebDriver getRemoteDriver();
 }

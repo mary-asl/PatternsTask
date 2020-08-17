@@ -16,7 +16,13 @@ public class FirefoxDriverCreator implements DriverCreator, getRemoteDriver {
     }
 
     @Override
-    public WebDriver getRemoteDriver() throws MalformedURLException {
-        return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.firefox());
+    public WebDriver getRemoteDriver() {
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.firefox());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
     }
 }

@@ -15,7 +15,7 @@ public abstract class AbstractPage {
     }
 
     public boolean isElementPresent(By locator) {
-        return !driver.findElements(locator).isEmpty();
+        return !getWebElements(locator).isEmpty();
     }
 
     public void waitForElementPresent(By locator) {
@@ -47,15 +47,15 @@ public abstract class AbstractPage {
 
     public void redrawElement(By locator) {
         new  WebDriverWait(driver, WAIT_FOR_ELEMENT_SECONDS).until(ExpectedConditions.
-                refreshed(ExpectedConditions.stalenessOf(driver.findElement(locator))));
+                refreshed(ExpectedConditions.stalenessOf(getWebElement(locator))));
     }
 
     public void highlightElement(By locator){
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", driver.findElement(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = '" + "yellow" + "'", getWebElement(locator));
     }
 
     public void unHighlightElement(By locator){
-        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = '" + "none" + "'",  driver.findElement(locator));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].style.backgroundColor = '" + "none" + "'",  getWebElement(locator));
     }
 
 }

@@ -25,25 +25,25 @@ public class HomePage extends AbstractPage {
     public HomePage clickToCountry(String country) {
         switch (country) {
             case ("Belarus"):
-                driver.findElement(By.xpath("//span[@class='c-flag-by']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-by']/../a")).click();
                 break;
             case ("Россия"):
-                driver.findElement(By.xpath("//span[@class='c-flag-ru']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-ru']/../a")).click();
                 break;
             case ("Kazakhstan"):
-                driver.findElement(By.xpath("//span[@class='c-flag-kz']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-kz']/../a")).click();
                 break;
             case ("Armenia"):
-                driver.findElement(By.xpath("//span[@class='c-flag-am']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-am']/../a")).click();
                 break;
             case ("Kyrgyzstan"):
-                driver.findElement(By.xpath("//span[@class='c-flag-kg']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-kg']/../a")).click();
                 break;
             case ("Poland"):
-                driver.findElement(By.xpath("//span[@class='c-flag-pl']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-pl']/../a")).click();
                 break;
             case ("Slovakia"):
-                driver.findElement(By.xpath("//span[@class='c-flag-sk']/../a")).click();
+                getWebElement(By.xpath("//span[@class='c-flag-sk']/../a")).click();
                 break;
         }
         return this;
@@ -67,7 +67,7 @@ public class HomePage extends AbstractPage {
 
     public EksmoPage clickBrandLogo() throws Exception {
         ((JavascriptExecutor) driver).executeScript("window.scrollBy(0,4700)");
-        WebElement buttonNext = driver.findElement(BUTTON_NEXT_BRAND_LOCATOR);
+        WebElement buttonNext = getWebElement(BUTTON_NEXT_BRAND_LOCATOR);
         waitForElementVisible(BUTTON_NEXT_BRAND_LOCATOR);
         String js = String.format("window.scroll(0, %s)", buttonNext.getLocation().getY());
         ((JavascriptExecutor) driver).executeScript(js);
@@ -75,8 +75,8 @@ public class HomePage extends AbstractPage {
         do {
             buttonNext.click();
         }
-        while (!driver.findElement(EKSMO_LOGO_LOCATOR).isDisplayed());
-        driver.findElement(EKSMO_LOGO_LOCATOR).click();
+        while (!getWebElement(EKSMO_LOGO_LOCATOR).isDisplayed());
+        getWebElement(EKSMO_LOGO_LOCATOR).click();
         return new EksmoPage();
     }
 }

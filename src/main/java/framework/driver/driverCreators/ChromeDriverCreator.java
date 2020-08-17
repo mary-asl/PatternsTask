@@ -17,7 +17,13 @@ public class ChromeDriverCreator implements DriverCreator, getRemoteDriver {
     }
 
     @Override
-    public WebDriver getRemoteDriver() throws MalformedURLException {
-        return new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+    public WebDriver getRemoteDriver() {
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return driver;
     }
 }

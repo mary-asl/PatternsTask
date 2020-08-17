@@ -27,8 +27,7 @@ public abstract class AbstractPage {
     }
 
     public String getText(By by) {
-        waitForElementVisible(by);
-        return driver.findElement(by).getText();
+        return getWebElement(by).getText();
     }
 
     public WebElement getWebElement(By by) {

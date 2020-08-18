@@ -27,7 +27,7 @@ public class TextSearchTest extends BaseForAllTests {
         boolean asMatch = keyWords.stream().allMatch(keyWord -> searchingItemActualName.isEmpty() ?
                 false : StringUtils.containsIgnoreCase(searchingItemActualName, keyWord));
 
-        Assert.assertTrue(asMatch, "expected item is not found");
+        Assert.assertTrue(asMatch, "expec3ted item is not found");
     }
 
     @Test(description = "verify that page title changed to searching item's name",

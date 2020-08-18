@@ -14,16 +14,18 @@ public class DropdownListsTest extends BaseForAllTests {
             dataProvider = "locationDataProvider")
     public void verifyCurrentLocation(Locale locale) throws Exception {
         HomePage homePage = new HomePage().hoverToChangeLocaleBtn();
-        homePage.clickToCountry(locale.getCountry());
+        homePage.clickToCountry(locale);
         Assert.assertEquals(homePage.getCurrentLocale(), locale.getLocation(), "current location wasn't change");
     }
 
     @DataProvider(name = "locationDataProvider", parallel = false)
     public Object[][] locationProvider() {
         return new Object[][]{
-                {new Locale().setCountry("Belarus").setLocation("Минск")},
-                {new Locale().setCountry("Kazakhstan").setLocation("Нур-Султан")},
-                {new Locale().setCountry("Armenia").setLocation("Ереван")}
+                {new LocaleData().getMinskLocale()},
+                {new LocaleData().getNurSultanLocale()},
+                {new LocaleData().getMoscowLocale()},
+                {new LocaleData().getBishkekLocale()},
+                {new LocaleData().getYerevanLocale()}
         };
     }
 }

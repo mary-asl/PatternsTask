@@ -4,6 +4,15 @@ public class Locale {
 
     private String country;
     private String location;
+    private String countryCode;
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
+    }
 
     public Locale setCountry(String country) {
         this.country = country;

@@ -1,5 +1,6 @@
 package pageObject;
 
+import businessObject.Locale;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -22,30 +23,8 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public HomePage clickToCountry(String country) {
-        switch (country) {
-            case ("Belarus"):
-                click(By.xpath("//span[@class='c-flag-by']/../a"));
-                break;
-            case ("Россия"):
-                click(By.xpath("//span[@class='c-flag-ru']/../a"));
-                break;
-            case ("Kazakhstan"):
-                click(By.xpath("//span[@class='c-flag-kz']/../a"));
-                break;
-            case ("Armenia"):
-                click(By.xpath("//span[@class='c-flag-am']/../a"));
-                break;
-            case ("Kyrgyzstan"):
-                click(By.xpath("//span[@class='c-flag-kg']/../a"));
-                break;
-            case ("Poland"):
-                click(By.xpath("//span[@class='c-flag-pl']/../a"));
-                break;
-            case ("Slovakia"):
-                click(By.xpath("//span[@class='c-flag-sk']/../a"));
-                break;
-        }
+    public HomePage clickToCountry(Locale locale) {
+        click(By.xpath("//span[@class='c-flag-" + locale.getCountryCode() + "']/../a"));
         return this;
     }
 

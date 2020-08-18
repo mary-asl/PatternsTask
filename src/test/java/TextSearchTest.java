@@ -24,7 +24,8 @@ public class TextSearchTest extends BaseForAllTests {
         CategoryPage categoryPage = new HomePage().cleanInputSearch().searchForItem(searchingItem);
         String searchingItemActualName = categoryPage.getSearchingItemName();
         List<String> keyWords = Arrays.asList(categoryPage.getInputValue().split("\\s"));
-        boolean asMatch = keyWords.stream().allMatch(keyWord -> StringUtils.containsIgnoreCase(searchingItemActualName, keyWord));
+        boolean asMatch = keyWords.stream().allMatch(keyWord -> searchingItemActualName.isEmpty() ?
+                false : StringUtils.containsIgnoreCase(searchingItemActualName, keyWord));
 
         Assert.assertTrue(asMatch, "expected item is not found");
     }

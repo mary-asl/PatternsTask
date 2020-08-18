@@ -5,8 +5,9 @@ public class Locale {
     private String country;
     private String location;
 
-    public void setCountry(String country) {
+    public Object setCountry(String country) {
         this.country = country;
+        return this;
     }
 
     public String getCountry() {
@@ -17,7 +18,8 @@ public class Locale {
         return location;
     }
 
-    public void setLocation(String location) {
+    public Object setLocation(String location) {
         this.location = location;
+        return this;
     }
 }

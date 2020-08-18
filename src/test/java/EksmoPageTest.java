@@ -1,4 +1,3 @@
-import framework.util.WebElementsParser;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -25,7 +24,7 @@ public class EksmoPageTest extends BaseForAllTests {
     public void filterByDiscount(@Optional(value = "Psychology") String category) throws Exception {
         boolean actual = false;
         CategoryPage categoryPage = new HomePage().clickBrandLogo().selectCategory(category).filterByDiscount();
-        List<Double> doubleDiscounts = WebElementsParser.parseDiscountsToDouble(categoryPage.getItemsDiscount());
+        List<Double> doubleDiscounts = categoryPage.getItemsDiscount();
         outerloop:
         for (int i = 0; i < doubleDiscounts.size(); i++) {
             for (int j = i + 1; j < doubleDiscounts.size(); j++) {
@@ -43,7 +42,7 @@ public class EksmoPageTest extends BaseForAllTests {
     public void filterByRate() throws Exception {
         CategoryPage categoryPage = new CategoryPage().filterByRate();
         boolean actual = false;
-        List<Integer> integerRates = WebElementsParser.parseRatesToInt(categoryPage.getItemsRate());
+        List<Integer> integerRates = categoryPage.getItemsRate();
         outerloop:
         for (int i = 0; i < integerRates.size(); i++) {
             for (int j = i + 1; j < integerRates.size(); j++) {
@@ -61,7 +60,7 @@ public class EksmoPageTest extends BaseForAllTests {
     public void filterByPrice() throws Exception {
         boolean actual = false;
         CategoryPage categoryPage = new CategoryPage().filterByPrice();
-        List<Integer> integerPrices = WebElementsParser.parsePricesToInt(categoryPage.getItemsPrice());
+        List<Integer> integerPrices = categoryPage.getItemsPrice();
         outerloop:
         for (int i = 0; i < integerPrices.size(); i++) {
             for (int j = i + 1; j < integerPrices.size(); j++) {

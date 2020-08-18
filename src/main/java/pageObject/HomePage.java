@@ -70,10 +70,11 @@ public class HomePage extends AbstractPage {
         WebElement buttonNext = getWebElement(BUTTON_NEXT_BRAND_LOCATOR);
         String js = String.format("window.scroll(0, %s)", buttonNext.getLocation().getY());
         ((JavascriptExecutor) driver).executeScript(js);
+        waitForElementEnabled(BUTTON_NEXT_BRAND_LOCATOR);
         do {
             buttonNext.click();
         }
-        while (!getWebElement(EKSMO_LOGO_LOCATOR).isDisplayed());
+        while (!driver.findElement(EKSMO_LOGO_LOCATOR).isDisplayed());
         click(EKSMO_LOGO_LOCATOR);
         return new EksmoPage();
     }

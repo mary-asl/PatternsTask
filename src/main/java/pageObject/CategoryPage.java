@@ -1,11 +1,12 @@
 package pageObject;
 
 import framework.util.Screenshoter;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CategoryPage extends AbstractPage {
 
@@ -36,18 +37,20 @@ public class CategoryPage extends AbstractPage {
         return getWebElement(SEARCH_INPUT_LOCATOR).getAttribute("value");
     }
 
-    public List<WebElement> getItemsRate() {
-        return getWebElements(ITEMS_RATE_LOCATOR);
+    public List<Integer> getItemsRate() {
+        return getWebElements(ITEMS_RATE_LOCATOR).stream().map(webElement -> Integer.parseInt(webElement.getText())).collect(Collectors.toList());
     }
 
-    public List<WebElement> getItemsPrice() {
+    public List<Integer> getItemsPrice() {
         refresh();
-        return getWebElements(ITEMS_PRICE_LOCATOR);
+        return getWebElements(ITEMS_PRICE_LOCATOR).stream().map(webElement -> Integer.parseInt(StringUtils
+                .substringBefore(webElement.getText()
+                        .replaceAll("\\s+", ""), "тг"))).collect(Collectors.toList());
     }
 
-    public List<WebElement> getItemsDiscount() {
+    public List<Double> getItemsDiscount() {
         refresh();
-        return getWebElements(ITEMS_DISCOUNTS_LOCATOR);
+        return getWebElements(ITEMS_DISCOUNTS_LOCATOR).stream().map(webElement -> Double.parseDouble(webElement.getText().substring(0, 3))).collect(Collectors.toList());
     }
 
     public CategoryPage filterByRate() {

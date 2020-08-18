@@ -12,20 +12,18 @@ public class DropdownListsTest extends BaseForAllTests {
 
     @Test(description = "verify that current location was changed after changed the country",
             dataProvider = "locationDataProvider")
-    public void verifyCurrentLocation(String country, String expectedLocation) throws Exception {
-        Locale locale = new Locale();
+    public void verifyCurrentLocation(Locale locale) throws Exception {
         HomePage homePage = new HomePage().hoverToChangeLocaleBtn();
-        locale.setCountry(country);
         homePage.clickToCountry(locale.getCountry());
-        Assert.assertEquals(homePage.getCurrentLocale(), expectedLocation, "current location wasn't change");
+        Assert.assertEquals(homePage.getCurrentLocale(), locale.getLocation(), "current location wasn't change");
     }
 
     @DataProvider(name = "locationDataProvider", parallel = false)
     public Object[][] locationProvider() {
         return new Object[][]{
-                {"Belarus", "Минск"},
-                {"Kazakhstan", "Нур-Султан"},
-                {"Armenia", "Ереван"}
+                {new Locale().setCountry("Belarus").setLocation("Минск")},
+                {new Locale().setCountry("Kazakhstan").setLocation("Нур-Султан")},
+                {new Locale().setCountry("Armenia").setLocation("Ереван")}
         };
     }
 }

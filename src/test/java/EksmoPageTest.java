@@ -26,7 +26,7 @@ public class EksmoPageTest extends BaseForAllTests {
         List<Double> doubleDiscounts = categoryPage.getItemsDiscount();
         List<Double> sortedDoubleDiscounts = new ArrayList<>(doubleDiscounts);
         Collections.sort(sortedDoubleDiscounts);
-        Assert.assertTrue(doubleDiscounts.equals(sortedDoubleDiscounts), "filter by discount does not sort items correctly");
+        Assert.assertEquals(doubleDiscounts, sortedDoubleDiscounts, "filter by discount does not sort items correctly");
     }
 
     @Test(description = "verify that items filtered by rate")
@@ -35,7 +35,7 @@ public class EksmoPageTest extends BaseForAllTests {
         List<Integer> integerRates = categoryPage.getItemsRate();
         List<Integer> sortedIntegerRates = new ArrayList<>(integerRates);
         Collections.sort(sortedIntegerRates, Collections.reverseOrder());
-        Assert.assertTrue(integerRates.equals(sortedIntegerRates), "filter by rate does not sort items correctly");
+        Assert.assertEquals(integerRates, sortedIntegerRates, "filter by rate does not sort items correctly");
     }
 
     @Test(description = "verify that items filtered by price")
@@ -44,7 +44,7 @@ public class EksmoPageTest extends BaseForAllTests {
         List<Integer> integerPrices = categoryPage.getItemsPrice();
         List<Integer> sortedIntegerPrices = new ArrayList<>(integerPrices);
         Collections.sort(sortedIntegerPrices);
-        Assert.assertTrue(integerPrices.equals(sortedIntegerPrices), "filter by price does not sort items correctly");
+        Assert.assertEquals(integerPrices, sortedIntegerPrices, "filter by price does not sort items correctly");
     }
 
     @Test(description = "Verify that categories are displayed on the page")

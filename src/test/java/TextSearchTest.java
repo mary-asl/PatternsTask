@@ -7,10 +7,10 @@ import pageObject.CategoryPage;
 import pageObject.HomePage;
 import pageObject.ItemPage;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.Stream;
 
 public class TextSearchTest extends BaseForAllTests {
 
@@ -22,19 +22,11 @@ public class TextSearchTest extends BaseForAllTests {
             dataProvider = "searchingItems")
     public void isItemFound(String searchingItem) throws Exception {
         CategoryPage categoryPage = new HomePage().cleanInputSearch().searchForItem(searchingItem);
-        AtomicBoolean actual = new AtomicBoolean(false);
-
         String searchingItemActualName = categoryPage.getSearchingItemName();
-        String[] subStr = categoryPage.getInputValue().split(" ");
+        List<String> keyWords = Arrays.asList(categoryPage.getInputValue().split("\\s"));
+        boolean asMatch = keyWords.stream().allMatch(keyWord -> StringUtils.containsIgnoreCase(searchingItemActualName, keyWord));
 
-        for(String el : subStr) {
-            if (!StringUtils.containsIgnoreCase(searchingItemActualName, el)) {
-                actual.set(false);
-                break;
-            } else
-                actual.set(true);
-        }
-        Assert.assertTrue(actual.get(), "expected item is not found");
+        Assert.assertTrue(asMatch, "expected item is not found");
     }
 
     @Test(description = "verify that page title changed to searching item's name",

@@ -7,11 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
+import java.io.FileInputStream;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class DriverSingleton {
 
-    private static WebDriverTypes defaultDriverType = WebDriverTypes.FIREFOX;
+public class DriverSingleton {
 
     private static WebDriver driver;
 
@@ -20,15 +21,15 @@ public class DriverSingleton {
 
     public static Logger logger = LogManager.getLogger();
 
-    public static WebDriver getWebDriver(WebDriverTypes type) throws Exception {
+    public static WebDriver getWebDriver(String type) throws Exception {
         if (driver == null) {
 
             switch (type) {
-                case FIREFOX: {
+                case ("FIREFOX") : {
                     driver = new FirefoxDriverCreator().getDriver();
                     break;
                 }
-                case CHROME: {
+                case ("CHROME"): {
                     driver = new ChromeDriverCreator().getDriver();
                     break;
                 }
@@ -43,11 +44,10 @@ public class DriverSingleton {
     }
 
     public static WebDriver getWebDriver() throws Exception {
-        return getWebDriver(defaultDriverType);
-    }
-
-    public static void setDefaultWebDriverType(WebDriverTypes type) {
-        defaultDriverType = type;
+        FileInputStream propertiesFile = new FileInputStream("./src/main/java/framework/config/wildberries.properties");
+        Properties properties = new Properties();
+        properties.load(propertiesFile);
+        return getWebDriver(properties.getProperty("defaultDriverType"));
     }
 
     public static void closeBrowser(WebDriver driver) {

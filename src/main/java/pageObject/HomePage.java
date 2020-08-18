@@ -49,8 +49,8 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public WebElement getCurrentLocale() {
-        return getWebElement(GEO_LOCATION_TEXT_LOCATOR);
+    public String getCurrentLocale() {
+        return getText(GEO_LOCATION_TEXT_LOCATOR);
     }
 
     public HomePage cleanInputSearch() {

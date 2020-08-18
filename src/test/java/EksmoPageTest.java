@@ -9,7 +9,7 @@ import pageObject.EksmoPage;
 import pageObject.HomePage;
 import pageObject.ItemPage;
 
-import java.util.List;
+import java.util.*;
 
 public class EksmoPageTest extends BaseForAllTests {
 
@@ -22,55 +22,29 @@ public class EksmoPageTest extends BaseForAllTests {
     @Test(description = "verify that items filtered by discount")
     @Parameters({"category"})
     public void filterByDiscount(@Optional(value = "Psychology") String category) throws Exception {
-        boolean actual = false;
         CategoryPage categoryPage = new HomePage().clickBrandLogo().selectCategory(category).filterByDiscount();
         List<Double> doubleDiscounts = categoryPage.getItemsDiscount();
-        outerloop:
-        for (int i = 0; i < doubleDiscounts.size(); i++) {
-            for (int j = i + 1; j < doubleDiscounts.size(); j++) {
-                if (doubleDiscounts.get(i) > doubleDiscounts.get(j)) {
-                    actual = false;
-                    break outerloop;
-                } else
-                    actual = true;
-            }
-        }
-        Assert.assertTrue(actual, "filter by discount does not sort items correctly");
+        List<Double> sortedDoubleDiscounts = new ArrayList<>(doubleDiscounts);
+        Collections.sort(sortedDoubleDiscounts);
+        Assert.assertTrue(doubleDiscounts.equals(sortedDoubleDiscounts), "filter by discount does not sort items correctly");
     }
 
     @Test(description = "verify that items filtered by rate")
     public void filterByRate() throws Exception {
         CategoryPage categoryPage = new CategoryPage().filterByRate();
-        boolean actual = false;
         List<Integer> integerRates = categoryPage.getItemsRate();
-        outerloop:
-        for (int i = 0; i < integerRates.size(); i++) {
-            for (int j = i + 1; j < integerRates.size(); j++) {
-                if (integerRates.get(i) < integerRates.get(j)) {
-                    actual = false;
-                    break outerloop;
-                } else
-                    actual = true;
-            }
-        }
-        Assert.assertTrue(actual, "filter by rate does not sort items correctly");
+        List<Integer> sortedIntegerRates = new ArrayList<>(integerRates);
+        Collections.sort(sortedIntegerRates, Collections.reverseOrder());
+        Assert.assertTrue(integerRates.equals(sortedIntegerRates), "filter by rate does not sort items correctly");
     }
 
     @Test(description = "verify that items filtered by price")
     public void filterByPrice() throws Exception {
-        boolean actual = false;
         CategoryPage categoryPage = new CategoryPage().filterByPrice();
         List<Integer> integerPrices = categoryPage.getItemsPrice();
-        outerloop:
-        for (int i = 0; i < integerPrices.size(); i++) {
-            for (int j = i + 1; j < integerPrices.size(); j++) {
-                if (integerPrices.get(i) > integerPrices.get(j)) {
-                    actual = false;
-                    break outerloop;
-                } else actual = true;
-            }
-        }
-        Assert.assertTrue(actual, "filter by price does not sort items correctly");
+        List<Integer> sortedIntegerPrices = new ArrayList<>(integerPrices);
+        Collections.sort(sortedIntegerPrices);
+        Assert.assertTrue(integerPrices.equals(sortedIntegerPrices), "filter by price does not sort items correctly");
     }
 
     @Test(description = "Verify that categories are displayed on the page")

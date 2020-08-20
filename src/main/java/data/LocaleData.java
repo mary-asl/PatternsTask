@@ -1,3 +1,5 @@
+package data;
+
 import businessObject.Locale;
 
 public class LocaleData {

@@ -1,13 +1,11 @@
 package steps;
 
 import framework.driver.DriverSingleton;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 import businessObject.Item;
 import pageObject.CategoryPage;
 import pageObject.EksmoPage;
@@ -19,6 +17,7 @@ import java.util.*;
 public class EksmoPageTest {
 
     private static final String HOME_PAGE_LINK = "https://www.wildberries.kz/";
+    private Item item = new Item();
 
     public EksmoPageTest() throws Exception {
         super();
@@ -30,64 +29,75 @@ public class EksmoPageTest {
         EksmoPage eksmoPage = new HomePage().clickBrandLogo();
     }
 
-    @When("I click \"([^\"]*)\" category on brand page")
+    @When("categories are displayed on brand page")
+    public void are_categories_displayed() throws Exception {
+        EksmoPage eksmoPage = new EksmoPage();
+        Assert.assertTrue(eksmoPage.findCategoryBanners().isDisplayed(), "there are no categories on the shop's page");
+    }
+
+    @And("I click {string} category on brand page")
     public void select_category(String category) throws Exception {
         CategoryPage categoryPage = new EksmoPage().selectCategory(category);
     }
 
-/*
-    @Test(description = "verify that items filtered by discount")
-    @Parameters({"category"})
-    public void filterByDiscount(@Optional(value = "Psychology") String category) throws Exception {
-        CategoryPage categoryPage = new HomePage().clickBrandLogo().selectCategory(category).filterByDiscount();
+    @And("filter displayed items by discount")
+    public void filter_by_discount() throws Exception {
+        new CategoryPage().filterByDiscount();
+    }
+
+    @Then("items filtered by discount  correctly")
+    public void is_items_filtered_by_discount() throws Exception {
+        CategoryPage categoryPage = new CategoryPage();
         List<Double> doubleDiscounts = categoryPage.getItemsDiscount();
         List<Double> sortedDoubleDiscounts = new ArrayList<>(doubleDiscounts);
         Collections.sort(sortedDoubleDiscounts);
         Assert.assertEquals(doubleDiscounts, sortedDoubleDiscounts, "filter by discount does not sort items correctly");
     }
 
-    @Test(description = "verify that items filtered by rate")
-    public void filterByRate() throws Exception {
-        CategoryPage categoryPage = new CategoryPage().filterByRate();
+    @When("filter displayed items by rate")
+    public void filter_by_rate() throws Exception {
+        new CategoryPage().filterByRate();
+    }
+
+    @Then("items filtered by rate  correctly")
+    public void is_items_filtered_by_rate() throws Exception {
+        CategoryPage categoryPage = new CategoryPage();
         List<Integer> integerRates = categoryPage.getItemsRate();
         List<Integer> sortedIntegerRates = new ArrayList<>(integerRates);
         Collections.sort(sortedIntegerRates, Collections.reverseOrder());
         Assert.assertEquals(integerRates, sortedIntegerRates, "filter by rate does not sort items correctly");
     }
 
-    @Test(description = "verify that items filtered by price")
-    public void filterByPrice() throws Exception {
-        CategoryPage categoryPage = new CategoryPage().filterByPrice();
+    @When("filter displayed items by price")
+    public void filter_by_price() throws Exception {
+        new CategoryPage().filterByPrice();
+    }
+
+    @Then("items filtered by price  correctly")
+    public void is_items_filtered_by_price() throws Exception {
+        CategoryPage categoryPage = new CategoryPage();
         List<Integer> integerPrices = categoryPage.getItemsPrice();
         List<Integer> sortedIntegerPrices = new ArrayList<>(integerPrices);
         Collections.sort(sortedIntegerPrices);
         Assert.assertEquals(integerPrices, sortedIntegerPrices, "filter by price does not sort items correctly");
     }
 
-    @Test(description = "Verify that categories are displayed on the page")
-    public void verifyDisplayedCategory() throws Exception {
-        driver.navigate().to(EKSMO_PAGE_LINK);
-        EksmoPage eksmoPage = new EksmoPage();
-        Assert.assertTrue(eksmoPage.findCategoryBanners().isDisplayed(), "there are no categories on the shop's page");
-    }
-
-    @Test(description = "verify that displayed item corresponds to the selected category",
-            dataProvider = "bookCategories")
-    public void isCategoryCorrect(String category, String expected) throws Exception {
-        Item item = new Item();
+    @When("I select category {string} and click to item with genre {string}")
+    public void select_product(String category, String expected) throws Exception {
         item.setCategory(expected);
-        driver.navigate().to(EKSMO_PAGE_LINK);
         CategoryPage categoryPage = new EksmoPage().selectCategory(category);
         ItemPage itemPage = categoryPage.selectItem();
-        itemPage.readAllInformation();
-        Assert.assertEquals(itemPage.getCategory(), item.getCategory(), "the item category does not match the selected category");
     }
 
-    @DataProvider(name = "bookCategories", parallel = false)
-    public Object[][] bookCategories() {
-        return new Object[][]{
-                {"Psychology", "Психология"},
-                {"Cooking", "Кулинария"}
-        };*/
+    @And("click button read all information")
+    public void read_all_info() throws Exception {
+        new ItemPage().readAllInformation();
+    }
+
+    @Then("item matches selected category")
+    public void is_items_category_correct() throws Exception {
+        ItemPage itemPage = new ItemPage();
+        Assert.assertEquals(itemPage.getCategory(), item.getCategory(), "the item category does not match the selected category");
+    }
 
 }

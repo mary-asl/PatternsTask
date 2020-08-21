@@ -4,8 +4,9 @@ public class Item {
     private String category;
     private String size;
 
-    public void setCategory(String category) {
+    public Item setCategory(String category) {
         this.category = category;
+        return this;
     }
 
     public void setSize(String size) {

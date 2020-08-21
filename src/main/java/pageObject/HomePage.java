@@ -37,9 +37,13 @@ public class HomePage extends AbstractPage {
         return this;
     }
 
-    public CategoryPage searchForItem(String item) throws Exception {
+    public HomePage setTextSearch(String item) throws Exception {
         WebElement input = getWebElement(SEARCH_INPUT_LOCATOR);
         new Actions(driver).sendKeys(input, item).build().perform();
+        return new HomePage();
+    }
+
+    public CategoryPage clickSearchButton() throws Exception {
         click(SEARCH_BTN_LOCATOR);
         return new CategoryPage();
     }

@@ -4,9 +4,9 @@
     <test name="Wildberries">
         <parameter name="category" value="Psychology"></parameter>
         <classes>
-            <class name="TextSearchTest"></class>
-            <class name="DropdownListsTest"></class>
-            <class name="EksmoPageTest"></class>
+            <class name="steps.TextSearchTest"></class>
+            <class name="steps.DropdownListsTest"></class>
+            <class name="steps.EksmoPageTest"></class>
         </classes>
     </test>
 

@@ -1,3 +1,8 @@
+package steps;
+
+import framework.driver.DriverSingleton;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Optional;
@@ -11,14 +16,26 @@ import pageObject.ItemPage;
 
 import java.util.*;
 
-public class EksmoPageTest extends BaseForAllTests {
+public class EksmoPageTest {
 
-    private static final String EKSMO_PAGE_LINK = "https://www.wildberries.kz/brands/eksmo";
+    private static final String HOME_PAGE_LINK = "https://www.wildberries.kz/";
 
     public EksmoPageTest() throws Exception {
         super();
     }
 
+    @Given("I open home page, scroll down and click to brand logo")
+    public void go_to_brand_page() throws Exception {
+        DriverSingleton.getWebDriver().navigate().to(HOME_PAGE_LINK);
+        EksmoPage eksmoPage = new HomePage().clickBrandLogo();
+    }
+
+    @When("I click \"([^\"]*)\" category on brand page")
+    public void select_category(String category) throws Exception {
+        CategoryPage categoryPage = new EksmoPage().selectCategory(category);
+    }
+
+/*
     @Test(description = "verify that items filtered by discount")
     @Parameters({"category"})
     public void filterByDiscount(@Optional(value = "Psychology") String category) throws Exception {
@@ -71,6 +88,6 @@ public class EksmoPageTest extends BaseForAllTests {
         return new Object[][]{
                 {"Psychology", "Психология"},
                 {"Cooking", "Кулинария"}
-        };
-    }
+        };*/
+
 }

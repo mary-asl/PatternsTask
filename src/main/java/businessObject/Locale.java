@@ -10,8 +10,9 @@ public class Locale {
         return countryCode;
     }
 
-    public void setCountryCode(String countryCode) {
+    public Locale setCountryCode(String countryCode) {
         this.countryCode = countryCode;
+        return this;
     }
 
     public Locale setCountry(String country) {
